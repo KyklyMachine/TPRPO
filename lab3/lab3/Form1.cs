@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace lab3
 {
    
@@ -76,66 +77,7 @@ namespace lab3
         private void toolStripMenuItem4_Click(object sender, EventArgs e){ }
     }
 
-    public class Node<T>
-    {
-        public T content;
-        public Node<T> Next = null;
-    }
+    
 
-    class MiniList<T>: IEnumerable<T>
-    {
-
-        static int num = 0;
-        public Node<T> Top;
-        public int Append(T s)
-        {
-            Node<T> p = new Node<T>();
-            p.content = s;
-            if (Top != null) p.Next = Top;
-            Top = p;
-            return num++;
-        }
-        public IEnumerator<T> GetEnumerator() => new MiniListEnum<T>(Top);
-        IEnumerator IEnumerable.GetEnumerator() => new MiniListEnum<T>(Top);
-    }
-
-
-    class MiniListEnum<T> : IEnumerator<T>
-    {
-        public Node<T> Top;
-        public Node<T> ENode;
-        
-
-        public MiniListEnum(Node<T> top)
-        {
-            Top = top;
-            ENode = top;
-        }
-
-        public T Current
-        {
-            get
-            {
-                return ENode.content;
-            }
-        }
-
-        object IEnumerator.Current => ENode.content;
-
-        public void Dispose()
-        {
-            GC.SuppressFinalize(this);
-        }
-
-        public bool MoveNext()
-        {
-            ENode = ENode.Next;   
-            return ENode != null;
-        }
-
-        public void Reset()
-        {
-            ENode = Top;
-        }
-    }
+    
 }
